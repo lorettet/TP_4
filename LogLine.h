@@ -29,11 +29,6 @@ class LogLine
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
     
     string getIpSource() { return ipSource; }
 	Date getDate() { return date; }
@@ -51,7 +46,11 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
     LogLine ( string log)
-    {		
+    {
+		#ifdef MAP
+			cout << "Appel au constructeur de <LogLine>" << endl;
+		#endif	
+		
 		//on admet que le fichier est tout beau et pas d'exceptions
 		ipSource = log.substr(0,log.find_first_of(" "));
 	
@@ -84,10 +83,7 @@ public:
 		log.erase(0,log.find_first_of(" ")+2);
 		userAgent = log.substr(0,log.find_first_of("\""));
 	}
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+    
 
     virtual ~LogLine ( ) { }
     // Mode d'emploi :
