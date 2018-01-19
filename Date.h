@@ -12,13 +12,12 @@
 #define DATE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <iostream>
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-Mois enum { "Janvier", "Fevrier", "Mars", "Avril", "Mai", 
-	"Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", 
-	"Decembre"  }
+
 //------------------------------------------------------------------------
 // Rôle de la classe <Date>
 //
@@ -37,23 +36,30 @@ public:
     // Contrat :
     //
 	int getJour() { return jour; }
-	Mois getMois() { return mois; }
+	string getMois() { return mois; }
 	int getAnnee() { return annee; }
-	int getHeure { return heure; }
-	int getMinute() { return minutes; }
+	int getHeure() { return heure; }
+	int getMinute() { return minute; }
 	int getSeconde() { return seconde; }
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-
 //-------------------------------------------- Constructeurs - destructeur
-    Date ( );
+    Date ( string apacheDate )
+    {
+			jour = stoi(apacheDate.substr(0,2));
+			mois = apacheDate.substr(3,3);
+			annee = stoi(apacheDate.substr(7,4));
+			heure = stoi(apacheDate.substr(12,2));
+			minute = stoi(apacheDate.substr(15,2));
+			seconde = stoi(apacheDate.substr(18,2));
+	}
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Date ( );
+    virtual ~Date ( ) { }
     // Mode d'emploi :
     //
     // Contrat :
@@ -64,7 +70,7 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 	int jour;
-	Mois mois;
+	string mois;
 	int annee;
 	int heure;
 	int minute;
