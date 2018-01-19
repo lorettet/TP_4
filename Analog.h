@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Date  -  description
+                           Analog  -  description
                              -------------------
     début                : 19/01/2018
     copyright            : (C) 2018 par Théo LORETTE-FROIDEVAUX 
@@ -7,24 +7,23 @@
     e-mail               : theo.lorette-froidevaux@insa-lyon.fr
 *************************************************************************/
 
-//---------- Interface de la classe <Date> (fichier Date.h) ----------------
-#if ! defined ( DATE_H )
-#define DATE_H
+//---------- Interface de la classe <Analog> (fichier Analog.h) ----------------
+#if ! defined ( ANALOG_H )
+#define ANALOG_H
 
 //--------------------------------------------------- Interfaces utilisées
-#include <iostream>
-using namespace std;
+
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Date>
+// Rôle de la classe <Analog>
 //
 //
 //------------------------------------------------------------------------
 
-class Date
+class Analog
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -35,39 +34,24 @@ public:
     //
     // Contrat :
     //
-	int getJour() { return jour; }
-	string getMois() { return mois; }
-	int getAnnee() { return annee; }
-	int getHeure() { return heure; }
-	int getMinute() { return minute; }
-	int getSeconde() { return seconde; }
+
 
 //------------------------------------------------- Surcharge d'opérateurs
-
-//-------------------------------------------- Constructeurs - destructeur
-    Date ( string apacheDate )
-    {
-		#ifdef  MAP
-		cout << "Appel au constructeur de <Date>" << endl;
-		#enif
-			jour = stoi(apacheDate.substr(0,2));
-			mois = apacheDate.substr(3,3);
-			annee = stoi(apacheDate.substr(7,4));
-			heure = stoi(apacheDate.substr(12,2));
-			minute = stoi(apacheDate.substr(15,2));
-			seconde = stoi(apacheDate.substr(18,2));
-	}
+    Analog & operator = ( const Analog & unAnalog );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Date ( ) 
-    {
-		#ifdef  MAP
-		cout << "Appel au destructeur de <Date>" << endl;
-		#enif	
-	}
+
+//-------------------------------------------- Constructeurs - destructeur
+    Analog ( string fileName, bool exceptFile = false, string outputFile = "", int heure = -1 );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Analog ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -77,17 +61,12 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	int jour;
-	string mois;
-	int annee;
-	int heure;
-	int minute;
-	int seconde;
+
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Date>
+//-------------------------------- Autres définitions dépendantes de <Analog>
 
-#endif // DATE_H
+#endif // ANALOG_H
 

@@ -23,7 +23,7 @@ $(EXE): $(OBJ)
 %.o: %.cpp
 	$(COMP) -c $< $(COMPFLAGS) $(DEFINE)
 
-main.o: main.cpp 
+main.o: main.cpp Analog.h
 	$(COMP) -c $< $(COMPFLAGS)
 	
 .PHONY:clean

@@ -1,17 +1,37 @@
 #include <iostream>
 using namespace std;
 
-#include "Date.h"
+void usage()
+{
+	cout << "Usage : analog [-e [-g outputFile [-t heure]]] file" << endl;
+	return 1;
+}
 
 int main(int size, char** args)
 {
-		cout << "Working in progress..." << endl;
-		Date d ("01/Oct/2012:13:30:46 +0200");
-		cout << d.getJour() << endl;
-		cout << d.getMois() << endl;
-		cout << d.getAnnee() << endl;
-		cout << d.getHeure() << endl;
-		cout << d.getMinute() << endl;
-		cout << d.getSeconde() << endl;
+		cout << "Work in progress..." << endl;
+		
+		bool excepteFile = false;
+		string fileName = "";
+		int heure = -1;
+		string outputFile = "";
+		
+		
+		if (size>8) usage();
+			
+		for (int i = 0; i < size; i++)
+		{
+			switch (args[i])
+			{
+				case "-e":
+					excepteFile = true;
+					break;
+				case ""
+			}
+		}
+
+		
 		return 0;
 }
+
+
