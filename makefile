@@ -3,31 +3,30 @@ COMP=g++
 EDL=g++
 RMFLAGS=-f
 COMPFLAGS = -ansi -pedantic  -Wall -std=c++11 -g
+#retirez yes pour compiler en release
 DEBUG=yes
-EXE=Catalogue
+EXE=analog
+SRC=$(wildcard *.cpp)
+OBJ=$(SRC:.cpp=.o)
 
 ifeq ($(DEBUG),yes)
-	DEFINE=-D MAP
+	DEFINE=-D MAP	
 else
 	DEFINE=
 endif
 
-.PHONY=clean
+all:$(EXE)
 
-$(EXE): main.o Catalogue.o TrajetCompose.o TrajetSimple.o
-	$(EDL) -o $(EXE) main.o Catalogue.o TrajetCompose.o TrajetSimple.o 
+$(EXE): $(OBJ)
+	$(EDL) -o $(EXE) $(OBJ)
 
-Catalogue.o: Catalogue.cpp Catalogue.h TrajetSimple.h TrajetCompose.h
-	$(COMP) -c Catalogue.cpp $(COMPFLAGS) $(DEFINE)
+%.o: %.cpp
+	$(COMP) -c $< $(COMPFLAGS) $(DEFINE)
 
-TrajetSimple.o: Trajet.h  TrajetSimple.h TrajetSimple.cpp
-	$(COMP) -c TrajetSimple.cpp $(COMPFLAGS) $(DEFINE)
-
-TrajetCompose.o: Trajet.h  TrajetCompose.h TrajetCompose.cpp
-	$(COMP) -c TrajetCompose.cpp $(COMPFLAGS) $(DEFINE)
-
-main.o: main.cpp Catalogue.h
-	$(COMP) -c main.cpp $(COMPFLAGS)
+main.o: main.cpp 
+	$(COMP) -c $< $(COMPFLAGS)
+	
+.PHONY:clean
 
 clean:
 	$(RM) $(RMFLAGS) *.o $(EXE)

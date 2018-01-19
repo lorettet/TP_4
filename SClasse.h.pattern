@@ -1,31 +1,28 @@
 /*************************************************************************
-                           Date  -  description
+                           Xxx  -  description
                              -------------------
-    début                : 19/01/2018
-    copyright            : (C) 2018 par Théo LORETTE-FROIDEVAUX 
-    * 						Marie-France GONZALEZ
-    e-mail               : theo.lorette-froidevaux@insa-lyon.fr
+    début                : $DATE$
+    copyright            : (C) $YEAR$ par $AUTHOR$
+    e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Date> (fichier Date.h) ----------------
-#if ! defined ( DATE_H )
-#define DATE_H
+//---------- Interface de la classe <Xxx> (fichier Xxx.h) ----------------
+#if ! defined ( XXX_H )
+#define XXX_H
 
 //--------------------------------------------------- Interfaces utilisées
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-Mois enum { "Janvier", "Fevrier", "Mars", "Avril", "Mai", 
-	"Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", 
-	"Decembre"  }
+
 //------------------------------------------------------------------------
-// Rôle de la classe <Date>
+// Rôle de la classe <Xxx>
 //
 //
 //------------------------------------------------------------------------
 
-class Date
+class Xxx : public Ancetre
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -36,24 +33,30 @@ public:
     //
     // Contrat :
     //
-	int getJour() { return jour; }
-	Mois getMois() { return mois; }
-	int getAnnee() { return annee; }
-	int getHeure { return heure; }
-	int getMinute() { return minutes; }
-	int getSeconde() { return seconde; }
+
 
 //------------------------------------------------- Surcharge d'opérateurs
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Date ( );
+    Xxx & operator = ( const Xxx & unXxx );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Date ( );
+
+//-------------------------------------------- Constructeurs - destructeur
+    Xxx ( const Xxx & unXxx );
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    Xxx ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Xxx ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -63,17 +66,12 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-	int jour;
-	Mois mois;
-	int annee;
-	int heure;
-	int minute;
-	int seconde;
+
 //----------------------------------------------------- Attributs protégés
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <Date>
+//-------------------------------- Autres définitions dépendantes de <Xxx>
 
-#endif // DATE_H
+#endif // XXX_H
 
