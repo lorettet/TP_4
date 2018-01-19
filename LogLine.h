@@ -12,7 +12,7 @@
 #define LOGLINE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <string>
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -50,7 +50,40 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    LogLine ( string log);
+    LogLine ( string log)
+    {		
+		//on admet que le fichier est tout beau et pas d'exceptions
+		ipSource = log.substr(0,log.find_first_of(" "));
+	
+		log.erase(0,log.find_first_of("[")+1);
+		date = log.substr(0,log.find_first_of("]"));
+		
+		log.erase(0,log.find_first_of("\"")+1);
+		requestType = log.substr(0,log.find_first_of(" "));
+		
+		
+		log.erase(0,log.find_first_of(" ")+1);	
+		requestFile = log.substr(0,log.find_first_of(" "));
+		
+
+		
+		log.erase(0,log.find_first_of("\"")+2);
+		responseCode = log.substr(0,log.find_first_of(" "));
+
+		log.erase(0,log.find_first_of(" ")+1);
+		string sizeString = log.substr(0,log.find_first_of(" "));
+		if(sizeString == "-"){
+			size = 0;
+		}else{
+			size = stoi(sizeString);
+		}
+		
+		log.erase(0,log.find_first_of("\"")+1);
+		source = log.substr(0,log.find_first_of("\""));
+		
+		log.erase(0,log.find_first_of(" ")+2);
+		userAgent = log.substr(0,log.find_first_of("\""));
+	}
     // Mode d'emploi :
     //
     // Contrat :
@@ -66,7 +99,6 @@ public:
 
 protected:
 //----------------------------------------------------- Méthodes protégées
-
 //----------------------------------------------------- Attributs protégés
 	string ipSource;
 	Date date;
