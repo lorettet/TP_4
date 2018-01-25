@@ -39,6 +39,16 @@ public:
 	string getSource() { return source; }
 	string getUserAgent() { return userAgent; }
 
+	public bool isFile()
+	{
+		 return !(fileExtension=="");
+	}
+	public bool isWebContent()
+	{
+		if(fileExtension != "jpg" || "gif" || "ico" ||"css"||"js"){
+			return true;
+		}
+	}
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -64,7 +74,20 @@ public:
 		log.erase(0,log.find_first_of(" ")+1);	
 		requestFile = log.substr(0,log.find_first_of(" "));
 		
-
+		//on enleve les trucs apres les ? pour php et ; pour iee
+		if(requestFile.find_first_of("?") =! -1)
+		{
+			requestFile.erase(requestFile.find_first_of("?"));
+		}else if(requestFile.find_first_of(";") =! -1)
+		{
+			requestFile.erase(requestFile.find_first_of("?"));
+		}
+		
+		if(requestFile.find_last_of(".")!=-1)
+		{
+			fileExtension = requestFile.substr(requestFile.find_last_of(".")+1);
+			//on admet que le point n'est jamais le dernier caractere
+		}
 		
 		log.erase(0,log.find_first_of("\"")+2);
 		responseCode = log.substr(0,log.find_first_of(" "));
@@ -100,6 +123,7 @@ protected:
 	Date date;
 	string requestType;
 	string requestFile;
+	string fileExtension; //is empty ("") when requestFile doesn't have an extension
 	string responseCode;
 	int size;
 	string source;
