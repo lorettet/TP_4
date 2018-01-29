@@ -1,10 +1,18 @@
 #include <iostream>
 #include <cstring>
+#include <unistd.h>
+#include <fstream>
 using namespace std;
 
 void usage(int test)
 {
-	cout << "Usage : analog [-e [-g outputFile.dot [-t heure]]] file" << test << endl;
+	cerr << "Usage : analog [-e [-g outputFile.dot [-t heure]]] file" << test << endl;
+}
+
+bool file_exist(const string & fileName)
+{
+    ifstream infile(fileName.c_str());
+    return infile.good();
 }
 
 int main(int size, char** args)
@@ -15,80 +23,45 @@ int main(int size, char** args)
 		int heure = -1;
 		string outputFile = "";
 
-		if (size>9 || size == 1) 
+		if (size == 1) 
 		{
 			usage(0);
 			return 1;
 		}
 			
-		for (int i = 1; i < size; i++)
+		char c;
+		while((c = getopt(size,args,"eg:t:")) != -1)
 		{
-			if(strcmp(args[i], "-e") == 0)
+			switch(c)
 			{
-				cout << "-e ok" << endl;
-				excepteFile = true;
-			}
-			else if(strcmp(args[i], "-g") == 0)
-			{
-				cout << "-g ok" << endl;
-				++i;
-				if(i == size)
-				{
-					usage(1);
-					return 1;
-				}
-				string nextString = args[i];
-				cout << nextString << endl;
-				if(nextString.size()>3)
-				{
-					cout << nextString.substr(nextString.size()-4,4) << endl;
-					if(nextString.substr(nextString.size()-4,4) == ".dot")
+				cout << c << endl;
+				case 'e':
+					excepteFile = true;
+					break;
+				case 'g':
+					outputFile = optarg;
+					break;
+				case 't':
+					try
 					{
-						outputFile = nextString;
+						heure = stoi(optarg);
+						if(heure > 23 || heure < 0)
+						{
+							usage(3);
+							return 1;
+						}
 					}
-					else 
+					catch (const invalid_argument & ia)
 					{
 						usage(2);
 						return 1;
 					}
-				}
-				else
-				{
-					usage(3);
-					return 1;
-				}
+					break;
 			}
-			else if(strcmp(args[i], "-t")==0)
-			{
-				cout << "-t ok" << endl;
-				++i;
-				if (i == size)
-				{
-					usage(4);
-					return 1;
-				}
-				try 
-				{
-					heure = stoi(args[i]);
-				}
-				catch(exception e)
-				{
-					usage(5);
-					return 1;
-				}
-				if(heure<0)
-				{
-					usage(6);
-					return 1;
-				}
-			}
-			else
-			{
-				cout << "filename ok" << endl;
-				fileName = args[i];
-			}
+			
 		}
-		if(fileName == "")
+		fileName = string(args[size-1]);
+		if(!file_exist(fileName))
 		{
 			usage(7);
 			return 1;
