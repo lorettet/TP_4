@@ -35,7 +35,6 @@ public:
 	Date getDate() { return date; }
 	string getRequestType() { return requestType; }
 	string getRequestURL() { return requestURL; }
-	string getRequestFile() { return requestFile; }
 	string getResponseCode() { return responseCode; }
 	int getSize() { return size; }
 	string getSource() { return source; }
@@ -80,10 +79,12 @@ public:
 		if(requestURL.find_first_of("?") != string::npos)
 		{
 			requestURL.erase(requestURL.find_first_of("?"));
-		}else if(requestURL.find_first_of(";") != string::npos)
-		{
-			requestURL.erase(requestURL.find_first_of("?"));
 		}
+		if(requestURL.find_first_of(";") != string::npos)
+		{
+			requestURL.erase(requestURL.find_first_of(";"));
+		}
+		
 		
 		if(requestURL.find_last_of(".")!=string::npos)
 		{
@@ -108,9 +109,7 @@ public:
 				
 		if(source.find(localhost) != string::npos)
 		{
-			cout << source << endl;
 			source.erase(0,localhost.size());
-			cout << source << endl;
 		}
 		
 		log.erase(0,log.find_first_of(" ")+2);
@@ -133,7 +132,6 @@ protected:
 	Date date;
 	string requestType;
 	string requestURL;
-	string requestFile;
 	string fileExtension; //is empty ("") when requestURL doesn't have an extension
 	string responseCode;
 	int size;

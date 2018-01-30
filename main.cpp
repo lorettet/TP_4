@@ -35,7 +35,6 @@ int main(int size, char** args)
 		{
 			switch(c)
 			{
-				cout << c << endl;
 				case 'e':
 					excepteFile = true;
 					break;

@@ -46,15 +46,14 @@ Analog::Analog (string fileName, bool exceptFile, string outputFile, int heure)
 	while(getline(in,line))
 	{
 		LogLine log(line);
-		cout << "src :" << log.getSource() << endl;cout << "dst :" << log.getRequestFile() << endl;
 		 
-		bool destFound = (nodes.find(log.getRequestFile()) != nodes.end());
+		bool destFound = (nodes.find(log.getRequestURL()) != nodes.end());
 		bool srcFound = (nodes.find(log.getSource()) != nodes.end());
 		
 		if(destFound)
 		{
-			nodes[log.getRequestFile()].hit++;
-			nodes[log.getRequestFile()].sources[log.getSource()]++;
+			nodes[log.getRequestURL()].hit++;
+			nodes[log.getRequestURL()].sources[log.getSource()]++;
 			
 		}
 		else
@@ -62,7 +61,7 @@ Analog::Analog (string fileName, bool exceptFile, string outputFile, int heure)
 			Element elem;
 			elem.hit = 1;
 			elem.sources[log.getSource()] = 1;
-			nodes[log.getRequestFile()] = elem;
+			nodes[log.getRequestURL()] = elem;
 		}
 		
 		if(!srcFound)
