@@ -14,6 +14,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <iostream>
 #include <unordered_map>
+#include "LogLine.h"
 using namespace std;
 //------------------------------------------------------------- Constantes
 
@@ -41,11 +42,13 @@ public:
     // Contrat :
     //
 
+	
+	
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-    Analog ( string fileName, bool exceptFile, string outputFile, int heure);
+    Analog ( string pFileName, bool pExceptFile, string pOutputFile, int pHeure);
     // Mode d'emploi :
     //
     // Contrat :
@@ -62,8 +65,18 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
+	bool filter( LogLine log );
+	
+	pair<string, int>* getTop10();
+	
+	void getGraphAndTop10();
+	
 //----------------------------------------------------- Attributs protégés
 	unordered_map<string, Element> nodes;
+	string fileName;
+	bool exceptFile;
+	string outputFile;
+	int heure;
 
 };
 

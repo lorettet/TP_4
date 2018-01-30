@@ -46,9 +46,8 @@ public:
 	}
 	bool isWebContent()
 	{
-		if(fileExtension != "jpg" || "gif" || "ico" ||"css"||"js"){
-			return true;
-		}
+		return !(fileExtension != "jpg" || fileExtension != "gif" || fileExtension != "ico" || fileExtension != "css"|| fileExtension != "js");
+
 	}
 
 //------------------------------------------------- Surcharge d'opérateurs
