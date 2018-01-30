@@ -14,6 +14,7 @@
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
 #include "Date.h"
+
 //------------------------------------------------------------- Constantes
 static const string localhost = "http://intranet-if.insa-lyon.fr";
 //------------------------------------------------------------------ Types
@@ -31,92 +32,27 @@ class LogLine
 public:
 //----------------------------------------------------- Méthodes publiques
     
-    string getIpSource() { return ipSource; }
-	Date getDate() { return date; }
-	string getRequestType() { return requestType; }
-	string getRequestURL() { return requestURL; }
-	string getResponseCode() { return responseCode; }
-	int getSize() { return size; }
-	string getSource() { return source; }
-	string getUserAgent() { return userAgent; }
+    string getIpSource();
+	Date getDate();
+	string getRequestType();
+	string getRequestFile();
+	string getResponseCode();
+	int getSize();
+	string getSource();
+	string getUserAgent();
 
-	bool isFile()
-	{
-		 return !(fileExtension=="");
-	}
-	bool isWebContent()
-	{
-		return !(fileExtension != "jpg" || fileExtension != "gif" || fileExtension != "ico" || fileExtension != "css"|| fileExtension != "js");
-
-	}
+	bool isFile();
+	bool isWebContent();
 
 //------------------------------------------------- Surcharge d'opérateurs
 
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    LogLine ( string log)
-    {
-		#ifdef MAP
-			cout << "Appel au constructeur de <LogLine>" << endl;
-		#endif	
-		
-		//on admet que le fichier est tout beau et pas d'exceptions
-		ipSource = log.substr(0,log.find_first_of(" "));
-	
-		log.erase(0,log.find_first_of("[")+1);
-		date = Date(log.substr(0,log.find_first_of("]")));
-		
-		log.erase(0,log.find_first_of("\"")+1);
-		requestType = log.substr(0,log.find_first_of(" "));
-		
-		
-		log.erase(0,log.find_first_of(" ")+1);	
-		requestURL = log.substr(0,log.find_first_of(" "));
-		
-		//on enleve les trucs apres les ? pour php et ; pour iee
-		if(requestURL.find_first_of("?") != string::npos)
-		{
-			requestURL.erase(requestURL.find_first_of("?"));
-		}
-		if(requestURL.find_first_of(";") != string::npos)
-		{
-			requestURL.erase(requestURL.find_first_of(";"));
-		}
-		
-		
-		if(requestURL.find_last_of(".")!=string::npos)
-		{
-			fileExtension = requestURL.substr(requestURL.find_last_of(".")+1);
-			//on admet que le point n'est jamais le dernier caractere
-		}
-		
-		log.erase(0,log.find_first_of("\"")+2);
-		responseCode = log.substr(0,log.find_first_of(" "));
 
-		log.erase(0,log.find_first_of(" ")+1);
-		string sizeString = log.substr(0,log.find_first_of(" "));
-		if(sizeString == "-"){
-			size = 0;
-		}else{
-			size = stoi(sizeString);
-		}
-		
-		log.erase(0,log.find_first_of("\"")+1);
-		source = log.substr(0,log.find_first_of("\""));
-		
-				
-		if(source.find(localhost) != string::npos)
-		{
-			source.erase(0,localhost.size());
-		}
-		
-		log.erase(0,log.find_first_of(" ")+2);
-		userAgent = log.substr(0,log.find_first_of("\""));
-	}
-    
+    LogLine (string log); //utile?
 
-    virtual ~LogLine ( ) { }
+    virtual ~LogLine ( );
     // Mode d'emploi :
     //
     // Contrat :

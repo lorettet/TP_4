@@ -25,6 +25,8 @@ $(EXE): $(OBJ)
 	
 Analog.o : Analog.h LogLine.h Date.h
 
+LogLine.o : LogLine.h Date.h
+
 main.o: main.cpp Analog.h
 	$(COMP) -c $< $(COMPFLAGS)
 	
@@ -32,3 +34,4 @@ main.o: main.cpp Analog.h
 
 clean:
 	$(RM) $(RMFLAGS) *.o $(EXE)
+	
