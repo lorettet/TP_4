@@ -67,9 +67,13 @@ protected:
 
 	bool filter( LogLine log );
 	
-	pair<string, int>* getTop10();
+	void getTop10();
 	
 	void getGraphAndTop10();
+	
+	void ajoutTop10 ( string url, int hits, pair<string,int>* top10);
+	
+	void afficherTop10 ( pair<string,int>* top10 );
 	
 //----------------------------------------------------- Attributs protégés
 	unordered_map<string, Element> nodes;
