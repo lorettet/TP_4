@@ -15,7 +15,7 @@
 #include <string>
 #include "Date.h"
 //------------------------------------------------------------- Constantes
-
+static const string localhost = "http://intranet-if.insa-lyon.fr";
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
@@ -104,6 +104,14 @@ public:
 		
 		log.erase(0,log.find_first_of("\"")+1);
 		source = log.substr(0,log.find_first_of("\""));
+		
+				
+		if(source.find(localhost) != string::npos)
+		{
+			cout << source << endl;
+			source.erase(0,localhost.size());
+			cout << source << endl;
+		}
 		
 		log.erase(0,log.find_first_of(" ")+2);
 		userAgent = log.substr(0,log.find_first_of("\""));
