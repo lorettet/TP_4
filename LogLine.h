@@ -35,7 +35,7 @@ public:
     string getIpSource();
 	Date getDate();
 	string getRequestType();
-	string getRequestFile();
+	string getRequestURL();
 	string getResponseCode();
 	int getSize();
 	string getSource();

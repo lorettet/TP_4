@@ -25,9 +25,9 @@ using namespace std;
 //----------------------------------------------------- Méthodes publiques
 
 string LogLine::getIpSource() { return ipSource; }
-//Date LogLine::getDate() { return date; }
+Date LogLine::getDate() { return date; }
 string LogLine::getRequestType() { return requestType; }
-string LogLine::getRequestFile() { return requestFile; }
+string LogLine::getRequestURL() { return requestURL; }
 string LogLine::getResponseCode() { return responseCode; }
 int LogLine::getSize() { return size; }
 string LogLine::getSource() { return source; }
