@@ -14,10 +14,10 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
-
+#include <fstream>
 //------------------------------------------------------ Include personnel
 #include "Analog.h"
-
+#include "LogLine.h"
 //------------------------------------------------------------- Constantes
 
 //----------------------------------------------------------------- PUBLIC
@@ -33,15 +33,48 @@ using namespace std;
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Analog::Analog ( string fileName, bool exceptFile, string outputFile, int heure )
+Analog::Analog (string fileName, bool exceptFile, string outputFile, int heure)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Analog>" << endl;
 #endif
-
+	string line;
+	ifstream in(fileName, ifstream::in);
 	
+	while(getline(in,line))
+	{
+		LogLine log(line);
+		cout << "src :" << log.getSource() << endl;cout << "dst :" << log.getRequestFile() << endl;
+		 
+		bool found = (nodes.find(log.getRequestFile()) != nodes.end());
+		
+		if(found)
+		{
+			nodes[log.getRequestFile()].hit++;
+			nodes[log.getRequestFile()].sources[log.getSource()]++;
+			
+		}
+		else
+		{
+			Element elem;
+			elem.hit = 0;
+			elem.sources[log.getSource()] = 1;
+			nodes[log.getRequestFile()] = elem;
+		}
+		
+
+	}
+	
+	for(const auto & sm_pair : nodes)
+	{
+		cout << sm_pair.first << " : " << sm_pair.second.hit << endl;
+		for(const auto & sc_pair : sm_pair.second.sources)
+		{
+			cout << "\t" << sc_pair.first << " : " << sc_pair.second << endl;
+		}
+	}
 
 } //----- Fin de Analog
 

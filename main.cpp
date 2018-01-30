@@ -2,6 +2,7 @@
 #include <cstring>
 #include <unistd.h>
 #include <fstream>
+#include "Analog.h"
 using namespace std;
 
 void usage(int test)
@@ -66,7 +67,7 @@ int main(int size, char** args)
 			usage(7);
 			return 1;
 		}
-		cout << "OK : " << fileName << " " << excepteFile << " " << outputFile << " " << heure << endl;
+		Analog a (fileName, excepteFile, outputFile, heure);
 
 		return 0;
 }

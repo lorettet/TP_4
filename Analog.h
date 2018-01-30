@@ -12,11 +12,17 @@
 #define ANALOG_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include <iostream>
+#include <unordered_map>
+using namespace std;
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
-
+typedef struct
+{
+	int hit;
+	unordered_map<string, int> sources;
+} Element;
 //------------------------------------------------------------------------
 // Rôle de la classe <Analog>
 //
@@ -37,15 +43,9 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Analog & operator = ( const Analog & unAnalog );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
-    Analog ( string fileName, bool exceptFile = false, string outputFile = "", int heure = -1 );
+    Analog ( string fileName, bool exceptFile, string outputFile, int heure);
     // Mode d'emploi :
     //
     // Contrat :
@@ -63,6 +63,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+	unordered_map<string, Element> nodes;
 
 };
 

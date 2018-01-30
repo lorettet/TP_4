@@ -13,6 +13,7 @@
 
 //--------------------------------------------------- Interfaces utilisées
 #include <string>
+#include "Date.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -33,17 +34,18 @@ public:
     string getIpSource() { return ipSource; }
 	Date getDate() { return date; }
 	string getRequestType() { return requestType; }
+	string getRequestURL() { return requestURL; }
 	string getRequestFile() { return requestFile; }
 	string getResponseCode() { return responseCode; }
 	int getSize() { return size; }
 	string getSource() { return source; }
 	string getUserAgent() { return userAgent; }
 
-	public bool isFile()
+	bool isFile()
 	{
 		 return !(fileExtension=="");
 	}
-	public bool isWebContent()
+	bool isWebContent()
 	{
 		if(fileExtension != "jpg" || "gif" || "ico" ||"css"||"js"){
 			return true;
@@ -65,27 +67,27 @@ public:
 		ipSource = log.substr(0,log.find_first_of(" "));
 	
 		log.erase(0,log.find_first_of("[")+1);
-		date = log.substr(0,log.find_first_of("]"));
+		date = Date(log.substr(0,log.find_first_of("]")));
 		
 		log.erase(0,log.find_first_of("\"")+1);
 		requestType = log.substr(0,log.find_first_of(" "));
 		
 		
 		log.erase(0,log.find_first_of(" ")+1);	
-		requestFile = log.substr(0,log.find_first_of(" "));
+		requestURL = log.substr(0,log.find_first_of(" "));
 		
 		//on enleve les trucs apres les ? pour php et ; pour iee
-		if(requestFile.find_first_of("?") =! -1)
+		if(requestURL.find_first_of("?") != string::npos)
 		{
-			requestFile.erase(requestFile.find_first_of("?"));
-		}else if(requestFile.find_first_of(";") =! -1)
+			requestURL.erase(requestURL.find_first_of("?"));
+		}else if(requestURL.find_first_of(";") != string::npos)
 		{
-			requestFile.erase(requestFile.find_first_of("?"));
+			requestURL.erase(requestURL.find_first_of("?"));
 		}
 		
-		if(requestFile.find_last_of(".")!=-1)
+		if(requestURL.find_last_of(".")!=string::npos)
 		{
-			fileExtension = requestFile.substr(requestFile.find_last_of(".")+1);
+			fileExtension = requestURL.substr(requestURL.find_last_of(".")+1);
 			//on admet que le point n'est jamais le dernier caractere
 		}
 		
@@ -122,8 +124,9 @@ protected:
 	string ipSource;
 	Date date;
 	string requestType;
+	string requestURL;
 	string requestFile;
-	string fileExtension; //is empty ("") when requestFile doesn't have an extension
+	string fileExtension; //is empty ("") when requestURL doesn't have an extension
 	string responseCode;
 	int size;
 	string source;

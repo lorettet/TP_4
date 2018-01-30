@@ -45,11 +45,13 @@ public:
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
+	Date () {}
+
     Date ( string apacheDate )
     {
 		#ifdef  MAP
 		cout << "Appel au constructeur de <Date>" << endl;
-		#enif
+		#endif
 			jour = stoi(apacheDate.substr(0,2));
 			mois = apacheDate.substr(3,3);
 			annee = stoi(apacheDate.substr(7,4));
@@ -66,7 +68,7 @@ public:
     {
 		#ifdef  MAP
 		cout << "Appel au destructeur de <Date>" << endl;
-		#enif	
+		#endif	
 	}
     // Mode d'emploi :
     //

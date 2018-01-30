@@ -22,6 +22,8 @@ $(EXE): $(OBJ)
 
 %.o: %.cpp
 	$(COMP) -c $< $(COMPFLAGS) $(DEFINE)
+	
+Analog.o : Analog.h LogLine.h Date.h
 
 main.o: main.cpp Analog.h
 	$(COMP) -c $< $(COMPFLAGS)
