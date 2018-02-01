@@ -41,7 +41,6 @@ bool LogLine::isFile()
 
 bool LogLine::isWebContent()
 {
-	cout << fileExtension <<endl;
 	return (fileExtension != "jpg" && fileExtension != "gif" && fileExtension != "ico" && fileExtension != "css" && fileExtension != "js");
 }
 //------------------------------------------------- Surcharge d'opérateurs

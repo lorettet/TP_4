@@ -42,6 +42,7 @@ public:
     // Contrat :
     //
 
+	static void ajoutTop10 ( string url, int hits, pair<string,int>* top10);
 	
 	
 
@@ -71,7 +72,6 @@ protected:
 	
 	void getGraphAndTop10();
 	
-	void ajoutTop10 ( string url, int hits, pair<string,int>* top10);
 	
 	void afficherTop10 ( pair<string,int>* top10 );
 	

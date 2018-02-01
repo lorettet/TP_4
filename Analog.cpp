@@ -97,14 +97,12 @@ void Analog::getGraphAndTop10( )
 	ifstream in(fileName, ifstream::in);
 	
 	pair<string, int> top10[10];
-	
 	while(getline(in,line))
 	{
 		LogLine log(line);
-
+		
 		if(!filter(log))
 		{
-			cout << log.getRequestURL() << endl;
 			continue;
 		}
 
@@ -162,38 +160,61 @@ void Analog::afficherTop10 ( pair<string,int>* top10 )
 
 void Analog::ajoutTop10 ( string url, int hits, pair<string,int>* top10)
 {
-	unsigned int i = 0;
-	
 	// On ne parcourt pas le tableau si le tuple n'est meme pas superieur au dernier (cas le plus fréquent)
 	if(hits < top10[9].second)
 		return;
-	
-	//On cherche si on peut placer le tuple dans le tableau
-	while(i < 10)
-	{
 		
-		//Si on est passé devant un tuple
+	for(unsigned int i = 0; i<10 ; i++)
+	{
+		//si case vide, on insere
+		if(top10[i].second == 0)
+		{
+			top10[i] = pair<string,int> (url, hits);
+			return;
+		}
+		
+		// si la valeur est supérieur
 		if(hits > top10[i].second)
 		{
-			// si on est sur une case vide ou le meme tuple
-			if(top10[i].second == 0 || top10[i].first == url)
+			
+			// on regarde si l'url est dans la suite du tableau
+			for(unsigned int j = i; j<10;j++)
 			{
-				top10[i] = pair<string,int>(url,hits);
-				return;
+				// si c'est le cas, on l insere
+				if(top10[j].first == url)
+				{
+					top10[j] = pair<string,int>(url,hits);
+					
+					//  et eventuellement on le remonte
+					while(j!=0)
+					{
+						if(top10[j-1].second < top10[j].second)
+						{
+							auto tmp = top10[j-1];
+							top10[j-1] = top10[j];
+							top10[j] = tmp;
+							j--;
+						}
+						else
+						{
+								return;
+						}
+					}
+					return;
+				}
 			}
 			
-			// sinon on décale les autres
-			pair<string, int> save (url,hits);
-			for(unsigned int j = i; j<10; j++)
+			// si on ne l'a pas trouvé, on l'insere et on decale les autres
+			auto save = pair<string, int> (url, hits);
+			for(unsigned int j = i; j < 10; j++)
 			{
 				auto tmp = top10[j];
-				
 				top10[j] = save;
-				
 				save = tmp;
 			}
 			return;
 		}
-		i++;
+		
+		
 	}
 }
