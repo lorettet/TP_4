@@ -41,7 +41,7 @@ bool LogLine::isFile()
 
 bool LogLine::isWebContent()
 {
-	return (fileExtension != "jpg" && fileExtension != "gif" && fileExtension != "ico" && fileExtension != "css" && fileExtension != "js");
+	return (fileExtension != "jpg" && fileExtension != "gif" && fileExtension != "ico" && fileExtension != "css" && fileExtension != "js" && fileExtension != "png");
 }
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -76,12 +76,18 @@ LogLine::LogLine ( string log)
 	{
 		requestURL.erase(requestURL.find_first_of(";"));
 	}
-	
+
 	
 	if(requestURL.find_last_of(".")!=string::npos)
 	{
 		fileExtension = requestURL.substr(requestURL.find_last_of(".")+1);
 		//on admet que le point n'est jamais le dernier caractere
+	}
+	
+	//On ajout un "/" au fichier sans extension
+	if(fileExtension == "" && requestURL[requestURL.size()-1] != '/')
+	{
+		requestURL += "/";
 	}
 	
 	log.erase(0,log.find_first_of("\"")+2);
@@ -102,6 +108,17 @@ LogLine::LogLine ( string log)
 	if(source.find(localhost) != string::npos)
 	{
 		source.erase(0,localhost.size());
+	}
+	
+		
+	//on enlese les argements apres "?" ou ";"
+	if(source.find_first_of("?") != string::npos)
+	{
+		source.erase(source.find_first_of("?"));
+	}
+	if(source.find_first_of(";") != string::npos)
+	{
+		source.erase(source.find_first_of(";"));
 	}
 	
 	log.erase(0,log.find_first_of(" ")+2);

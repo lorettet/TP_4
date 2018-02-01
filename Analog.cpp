@@ -108,7 +108,6 @@ void Analog::getGraphAndTop10( )
 
 		 
 		bool destFound = (nodes.find(log.getRequestURL()) != nodes.end());
-		bool srcFound = (nodes.find(log.getSource()) != nodes.end());
 		
 		// Destination existe deja dans la map des noeuds
 		if(destFound)
@@ -125,26 +124,11 @@ void Analog::getGraphAndTop10( )
 			nodes[log.getRequestURL()] = elem;
 		}
 		ajoutTop10 ( log.getRequestURL(), nodes[log.getRequestURL()].hit, top10);
-		
-		// Source n'existe pas dans la map des noeuds
-		if(!srcFound)
-		{
-			Element elem;
-			elem.hit = 0;
-			nodes[log.getSource()] = elem;
-		}
-
 	}
 	
-	// Affichage de test
-	/*for(const auto & sm_pair : nodes)
-	{
-		cout << sm_pair.first << " : " << sm_pair.second.hit << endl;
-		for(const auto & sc_pair : sm_pair.second.sources)
-		{
-			cout << "\t" << sc_pair.first << " : " << sc_pair.second << endl;
-		}
-	}*/
+	in.close();
+	
+	makeGraph();
 	
 	// Affichage top10
 	afficherTop10(top10);
@@ -156,6 +140,27 @@ void Analog::afficherTop10 ( pair<string,int>* top10 )
 	{
 		cout << (i+1) << " : " << top10[i].first << " " << top10[i].second << endl;
 	}
+}
+
+void Analog::makeGraph()
+{
+	ofstream out(outputFile);
+	
+	out << "digraph{" << endl;
+	for (const auto & i : nodes)
+	{
+		string url = i.first;
+		for(const auto & j : i.second.sources)
+		{
+				//out << url << " -> " << j.second << " [label=" << j.first << "];" << endl;
+				
+				out << "\"" << j.first << "\" -> \"" << url << "\" [label=" << j.second << "];" << endl;
+		}
+	}
+	
+	out << "}" << endl;
+	
+	out.close();
 }
 
 void Analog::ajoutTop10 ( string url, int hits, pair<string,int>* top10)
