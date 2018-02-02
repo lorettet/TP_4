@@ -103,22 +103,21 @@ LogLine::LogLine ( string log)
 	
 	log.erase(0,log.find_first_of("\"")+1);
 	source = log.substr(0,log.find_first_of("\""));
-	
-			
-	if(source.find(localhost) != string::npos)
-	{
-		source.erase(0,localhost.size());
-	}
-	
 		
 	//on enlese les argements apres "?" ou ";"
 	if(source.find_first_of("?") != string::npos)
 	{
 		source.erase(source.find_first_of("?"));
+
 	}
 	if(source.find_first_of(";") != string::npos)
 	{
 		source.erase(source.find_first_of(";"));
+	}
+	
+	if(source.find(localhost) != string::npos)
+	{
+		source.erase(0,localhost.size());
 	}
 	
 	log.erase(0,log.find_first_of(" ")+2);

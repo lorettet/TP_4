@@ -105,8 +105,7 @@ void Analog::getGraphAndTop10( )
 		{
 			continue;
 		}
-
-		 
+		
 		bool destFound = (nodes.find(log.getRequestURL()) != nodes.end());
 		
 		// Destination existe deja dans la map des noeuds
