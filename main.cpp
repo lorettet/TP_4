@@ -60,7 +60,7 @@ int main(int size, char** args)
 			
 		}
 
-		// Vérification du fichier de entré
+		// Vérification du fichier de entrée
 		fileName = string(args[size-1]);
 		if(fileName.find(".log") == string::npos)
 		{
@@ -82,7 +82,7 @@ int main(int size, char** args)
 			return 1;
 		}
 		
-		// Vérification de l'existence du fichier de sorti
+		// Vérification de l'existence du fichier de sortie
 		if(outputFile != "")
 		{
 			if(file_exist(outputFile))

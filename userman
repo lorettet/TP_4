@@ -1,0 +1,35 @@
+ANALOG(1)
+
+NAME
+	analog — analyse an Apache log file
+
+SYNOPSIS
+	analog [-g filename.dot] [-e] [-t hour] filename.log
+
+DESCRIPTION
+	The analog command reads the Apache log file filename.log. Without options, it displays the 10 most requested documents in the log and their hit count in descending order. The log file name must be specified.
+
+	The options are as follows:
+
+	-g filename.dot
+		Creates a file in the GraphViz format called “filename.dot”. The output file name must be specified. If file already exists, the user will be asked if he wants to overwrite it.
+
+	-e
+		Program will ignore all css documents, javascript documents and images. The file extensions that will be ignored are: css, js, jpg, png, ico and gif.
+
+	-t hour
+		Program will only take into account requests made during the interval [hour; hour+1]. The parameter hour must be an integer between 0 and 23.
+
+EXAMPLES
+	./analog somelog.log
+	./analog -g somedot.dot somelog.log
+	./analog -g somedot.dot -e somelog.log
+	./analog -g somedot.dot -t 12 somelog.log
+	./analog -g somedot.dot -e -t 12 somelog.log
+	
+
+AUTHORS
+	Theo Lorette-Froideveaux <theo.lorette-froidevaux@insa-lyon.fr>
+	Marie France Gonzalez Fierro <marie-france.gonzalez-fierro@insa-lyon.fr>
+
+February 2018

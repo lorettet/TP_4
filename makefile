@@ -6,6 +6,7 @@ COMPFLAGS = -ansi -pedantic  -Wall -std=c++11 -g
 #retirez yes pour compiler en release
 DEBUG=no
 EXE=analog
+EXEPATH=./bin/
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:.cpp=.o)
 
@@ -18,17 +19,10 @@ endif
 all:$(EXE)
 
 $(EXE): $(OBJ)
-	$(EDL) -o $(EXE) $(OBJ)
+	$(EDL) -o $(EXEPATH)$(EXE) $(OBJ)
 
 %.o: %.cpp
 	$(COMP) -c $< $(COMPFLAGS) $(DEFINE)
-	
-Analog.o : Analog.h LogLine.h Date.h
-
-LogLine.o : LogLine.h Date.h
-
-main.o: main.cpp Analog.h
-	$(COMP) -c $< $(COMPFLAGS)
 	
 .PHONY:clean
 
