@@ -40,6 +40,8 @@ Analog::Analog (string pFileName, bool pExceptFile, string pOutputFile, int pHeu
     cout << "Appel au constructeur de <Analog>" << endl;
 #endif
 	
+	cout << "Work in progress..." << endl;
+	
 	// Pas de graph a générer
 	if(outputFile == "")
 	{
@@ -84,10 +86,29 @@ bool Analog::filter( LogLine log)
 
 void Analog::getTop10()
 {
+	string line;
+	ifstream in(fileName, ifstream::in);
+	
 	pair<string, int> top10[10];
-	//TODO : lire et ajouter, ne pas oubier de filtrer
+	while(getline(in,line))
+	{
+		LogLine log(line);
+		
+		if(!filter(log))
+		{
+			continue;
+		}
+		
+		// Destination existe deja dans la map des noeuds
+
+		nodes[log.getRequestURL()].hit++;
+
+		ajoutTop10 ( log.getRequestURL(), nodes[log.getRequestURL()].hit, top10);
+	}
 	
+	in.close();
 	
+	// Affichage top10
 	afficherTop10(top10);
 }
 
@@ -137,6 +158,8 @@ void Analog::afficherTop10 ( pair<string,int>* top10 )
 {
 	for (unsigned int i = 0; i < 10; i++)
 	{
+		if(top10[i].second == 0)
+			return;
 		cout << (i+1) << " : " << top10[i].first << " " << top10[i].second << endl;
 	}
 }
@@ -150,9 +173,7 @@ void Analog::makeGraph()
 	{
 		string url = i.first;
 		for(const auto & j : i.second.sources)
-		{
-				//out << url << " -> " << j.second << " [label=" << j.first << "];" << endl;
-				
+		{		
 				out << "\"" << j.first << "\" -> \"" << url << "\" [label=" << j.second << "];" << endl;
 		}
 	}
