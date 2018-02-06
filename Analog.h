@@ -64,7 +64,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 	bool filter( LogLine log );
-    // Mode d'emploi : Vérifie si la ligne de log correspond au attente
+    // Mode d'emploi : Vérifie si la ligne de log correspond aux attentes
     //
     // log : la ligne de log à filtrer
     //
@@ -80,7 +80,7 @@ protected:
     
 	void getGraphAndTop10();
     // Mode d'emploi : Affiche le top 10 des fichiers les plus demandés
-    // et créé le fichier .dot correpondant au graph
+    // et créé le fichier .dot correpondant au graphe
     //
     // Contrat :
     //
@@ -89,7 +89,7 @@ protected:
     // Mode d'emploi : Ajoute dans le tableau passé en paramètre le 
     // tuple <url,nb de hit>. 
     //
-    // url : l'url du site
+    // url : l'url du site cible
     // hits : le nombre de hit
     // top10 : le tableau donnée/résultat représentant le top 10
     //
@@ -115,13 +115,13 @@ protected:
 //----------------------------------------------------- Attributs protégés
 	unordered_map<string, Element> nodes;
 	// map contenant pour chaque page, le nombre de fois qu'elle a été
-	// visité, ainsi que tous les sites qui l'ont visité
+	// visitée, ainsi que tous les sites qui l'ont visitée
 	
 	string fileName;
 	// le nom du fichier de log
 	
 	bool exceptFile;
-	// indique si on doit exclure les fichiers image/css/js
+	// vrai si on doit exclure les fichiers image/css/js
 	
 	string outputFile;
 	// le nom du fichier .dot de sortie. est vide si aucun fichier .dot

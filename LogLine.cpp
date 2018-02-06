@@ -47,27 +47,24 @@ bool LogLine::isWebContent()
 
 //-------------------------------------------- Constructeurs - destructeur
 
-//prerequis: on admet que la ligne du fichier est toute belle et pas d'exceptions
 LogLine::LogLine ( string log)
 {
 	#ifdef MAP
 		cout << "Appel au constructeur de <LogLine>" << endl;
 	#endif	
-	
-	//on admet que le fichier est tout beau et pas d'exceptions
-	ipSource = log.substr(0,log.find_first_of(" "));
 
+	ipSource = log.substr(0,log.find_first_of(" "));
 	log.erase(0,log.find_first_of("[")+1);
+	
 	date = Date(log.substr(0,log.find_first_of("]")));
-	
 	log.erase(0,log.find_first_of("\"")+1);
+	
 	requestType = log.substr(0,log.find_first_of(" "));
-	
-	
 	log.erase(0,log.find_first_of(" ")+1);	
-	requestURL = log.substr(0,log.find_first_of(" "));
 	
-	//on enleve les trucs apres les ? pour php et ; pour iee
+	requestURL = log.substr(0,log.find_first_of(" "));
+	log.erase(0,log.find_first_of("\"")+2);
+	//on enleve les parametres apres "?" pour php et ";" pour iee
 	if(requestURL.find_first_of("?") != string::npos)
 	{
 		requestURL.erase(requestURL.find_first_of("?"));
@@ -84,27 +81,27 @@ LogLine::LogLine ( string log)
 		//on admet que le point n'est jamais le dernier caractere
 	}
 	
-	//On ajout un "/" au fichier sans extension
+	//On ajoute un "/" au fichier sans extension
 	if(fileExtension == "" && requestURL[requestURL.size()-1] != '/')
 	{
 		requestURL += "/";
 	}
 	
-	log.erase(0,log.find_first_of("\"")+2);
-	responseCode = log.substr(0,log.find_first_of(" "));
 
+	responseCode = log.substr(0,log.find_first_of(" "));
 	log.erase(0,log.find_first_of(" ")+1);
+	
 	string sizeString = log.substr(0,log.find_first_of(" "));
+	log.erase(0,log.find_first_of("\"")+1);
 	if(sizeString == "-"){
 		size = 0;
 	}else{
 		size = stoi(sizeString);
 	}
 	
-	log.erase(0,log.find_first_of("\"")+1);
 	source = log.substr(0,log.find_first_of("\""));
-		
-	//on enlese les argements apres "?" ou ";"
+	log.erase(0,log.find_first_of(" ")+2);
+	//on enleve les argements apres "?" ou ";"
 	if(source.find_first_of("?") != string::npos)
 	{
 		source.erase(source.find_first_of("?"));
@@ -120,7 +117,6 @@ LogLine::LogLine ( string log)
 		source.erase(0,localhost.size());
 	}
 	
-	log.erase(0,log.find_first_of(" ")+2);
 	userAgent = log.substr(0,log.find_first_of("\""));
 }
 

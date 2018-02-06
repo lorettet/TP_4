@@ -77,7 +77,7 @@ int main(int size, char** args)
 		// Vérification de l'extension .dot
 		if(outputFile!="" && outputFile.find(".dot") == string::npos)
 		{
-			cerr << "Le fichier de sorti n'est pas un .dot" << endl;
+			cerr << "Le fichier de sortie n'est pas un .dot" << endl;
 			usage();
 			return 1;
 		}

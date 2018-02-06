@@ -65,7 +65,8 @@ public:
 	// Mode d'emploi : Extrait toutes les données d'une ligne de log
 	// Apache
     //
-    // Contrat :
+    // Contrat : La ligne doit respecter la structure standard 
+    // d'un fichier de log Apache
     //
 
 

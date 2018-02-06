@@ -198,7 +198,7 @@ void Analog::ajoutTop10 ( string url, int hits, pair<string,int>* top10)
 			return;
 		}
 		
-		// si la valeur est supérieur
+		// si la valeur est supérieure
 		if(hits > top10[i].second)
 		{
 			

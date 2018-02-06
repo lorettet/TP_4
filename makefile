@@ -27,5 +27,5 @@ $(EXE): $(OBJ)
 .PHONY:clean
 
 clean:
-	$(RM) $(RMFLAGS) *.o $(EXE)
+	$(RM) $(RMFLAGS) *.o $(EXEPATH)$(EXE)
 	
