@@ -42,7 +42,18 @@ public:
 	string getUserAgent();
 
 	bool isFile();
+	// Mode d'emploi : Vérifie si l'objet de la requete contient une 
+	// extension.
+    //
+    // Contrat :
+    //
+    
 	bool isWebContent();
+	// Mode d'emploi : Vérifie si l'objet de la requête n'est pas de 
+	// type image/css/js
+    //
+    // Contrat :
+    //
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -50,7 +61,13 @@ public:
 
 //-------------------------------------------- Constructeurs - destructeur
 
-    LogLine (string log); //utile?
+    LogLine (string log);
+	// Mode d'emploi : Extrait toutes les données d'une ligne de log
+	// Apache
+    //
+    // Contrat :
+    //
+
 
     virtual ~LogLine ( );
     // Mode d'emploi :
@@ -64,14 +81,31 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 //----------------------------------------------------- Attributs protégés
 	string ipSource;
+	// L'adresse ip de la source
+	
 	Date date;
+	// Date à laquel la requête a été effectuée
+	
 	string requestType;
+	// Type de la requête
+	
 	string requestURL;
-	string fileExtension; //is empty ("") when requestURL doesn't have an extension
+	// Fichier objet de la requête
+	
+	string fileExtension;
+	// Extension du fichier demandé
+	
 	string responseCode;
+	// Code HTTP de la réponse
+	
 	int size;
+	// Taille de la réponse
+	
 	string source;
+	// url de la source
+	
 	string userAgent;
+	// User agent de la source
 };
 
 //-------------------------------- Autres définitions dépendantes de <LogLine>

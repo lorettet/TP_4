@@ -22,24 +22,8 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Analog::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
-
-
-//------------------------------------------------- Surcharge d'opérateurs
-
-//-------------------------------------------- Constructeurs - destructeur
-Analog::Analog (string pFileName, bool pExceptFile, string pOutputFile, int pHeure) : fileName(pFileName), exceptFile(pExceptFile), outputFile(pOutputFile), heure(pHeure)
-// Algorithme :
-//
+void Analog::Analyse()
 {
-#ifdef MAP
-    cout << "Appel au constructeur de <Analog>" << endl;
-#endif
-	
 	cout << "Work in progress..." << endl;
 	
 	// Pas de graph a générer
@@ -51,6 +35,19 @@ Analog::Analog (string pFileName, bool pExceptFile, string pOutputFile, int pHeu
 	
 	// Génération graph et top10
 	getGraphAndTop10();
+}
+//------------------------------------------------- Surcharge d'opérateurs
+
+//-------------------------------------------- Constructeurs - destructeur
+Analog::Analog (string pFileName, bool pExceptFile, string pOutputFile, int pHeure) : fileName(pFileName), exceptFile(pExceptFile), outputFile(pOutputFile), heure(pHeure)
+// Algorithme :
+//
+{
+#ifdef MAP
+    cout << "Appel au constructeur de <Analog>" << endl;
+#endif
+	
+
 
 } //----- Fin de Analog
 
@@ -71,6 +68,9 @@ Analog::~Analog ( )
 
 bool Analog::filter( LogLine log)
 {
+	if(log.getResponseCode() == "404")
+		return false;
+	
 	bool ok = true;
 	if(exceptFile)
 	{

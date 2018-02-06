@@ -1,5 +1,5 @@
 /*************************************************************************
-                           Date  -  description
+                           Date  -  Représente une date
                              -------------------
     début                : 19/01/2018
     copyright            : (C) 2018 par Théo LORETTE-FROIDEVAUX 
@@ -20,7 +20,7 @@ using namespace std;
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Date>
-//
+// Permet d'extraire la date d'un fichier de log Apache.
 //
 //------------------------------------------------------------------------
 
@@ -30,11 +30,7 @@ class Date
 
 public:
 //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
+
 	int getJour() { return jour; }
 	string getMois() { return mois; }
 	int getAnnee() { return annee; }
@@ -59,7 +55,8 @@ public:
 			minute = stoi(apacheDate.substr(15,2));
 			seconde = stoi(apacheDate.substr(18,2));
 	}
-    // Mode d'emploi :
+    // Mode d'emploi : Prend en paramêtre une date au format trouvé dans
+    // les logs Apache et créer un objet Date.
     //
     // Contrat :
     //
@@ -70,10 +67,6 @@ public:
 		cout << "Appel au destructeur de <Date>" << endl;
 		#endif	
 	}
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 //------------------------------------------------------------------ PRIVE
 

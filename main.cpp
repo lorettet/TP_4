@@ -115,6 +115,7 @@ int main(int size, char** args)
 		
 		
 		Analog a (fileName, excepteFile, outputFile, heure);
+		a.Analyse();
 
 		return 0;
 }
