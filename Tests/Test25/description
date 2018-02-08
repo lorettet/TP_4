@@ -1,0 +1,1 @@
+Ce fichier permet de vérifier le comportement normal de affichage du top 10 et la création d'un document en format GraphViz en sélectionnant uniquement les requêtes comprises dans [heure; heure+1[

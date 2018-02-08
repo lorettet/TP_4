@@ -1,0 +1,1 @@
+Ce fichier permet de vérifier le comportement du programme si l'utilisateur rentre une option qui n'existe pas. L'option sera ignorée et l'utilisateur averti.

@@ -1,0 +1,1 @@
+Ce fichier permet de vérifier la gestion de l'erreur dans le cas où le nom pour le fichier de sortie GraphViz correspond à un fichier existant et l'utilisateur rentre quelque chose d'autre que 'y' et 'n'

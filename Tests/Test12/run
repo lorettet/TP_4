@@ -1,0 +1,2 @@
+echo 'digraph{
+}' > ./exists.dot;../../bin/analog -g exists.dot /tmp/anonyme.log

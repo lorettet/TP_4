@@ -1,0 +1,1 @@
+Ce fichier permet de vérifier l'affichage du top 10 pour l'option -t si l'utilisateur rentre un nombre non entier. Le nombre entré est tronqué

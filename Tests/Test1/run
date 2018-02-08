@@ -1,1 +1,1 @@
-../../bin/analog -g trash.dot -t 12 ../../logs/testtime.log
+../../bin/analog /tmp/anonyme.log

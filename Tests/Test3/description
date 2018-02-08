@@ -1,0 +1,1 @@
+Ce fichier permet de vérifier l'affichage du top 10 vide quand le fichier log à analyser n'a que des requêtes dont le code de retour est 404
