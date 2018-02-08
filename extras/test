@@ -1,5 +1,0 @@
-apt-get install graphviz
-make
-./analog -g test.dot anonyme.log
-echo "Génération du png..."
-dot -Tpng -o test.png test.dot

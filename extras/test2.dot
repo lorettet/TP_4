@@ -1,3 +1,0 @@
-digraph{
-"fo%o" -> "test" [label=42];
-}

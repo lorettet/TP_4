@@ -10,7 +10,7 @@ EXEPATH=./bin/
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:.cpp=.o)
 TESTPATH=./Tests/
-TEST=mktest.sh
+TEST=./mktest.sh
 
 ifeq ($(DEBUG),yes)
 	DEFINE=-D MAP	
@@ -18,20 +18,19 @@ else
 	DEFINE=
 endif
 
-all:$(EXE)
+all:$(EXEPATH)$(EXE)
 
-$(EXE): $(OBJ)
+$(EXEPATH)$(EXE): $(OBJ)
 	$(EDL) -o $(EXEPATH)$(EXE) $(OBJ)
 
 %.o: %.cpp
 	$(COMP) -c $< $(COMPFLAGS) $(DEFINE)
 	
-.PHONY:clean
+.PHONY:clean tests
 
 clean:
 	$(RM) $(RMFLAGS) *.o $(EXEPATH)$(EXE)
 
-test:
-	$(TESTPATH)$(TEST)
-	
-	
+tests:
+	cd Tests;./mktest.sh;cd ..
+
