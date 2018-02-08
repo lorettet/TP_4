@@ -1,1 +1,1 @@
-../../bin/analog: illegal option -- h
+../../bin/analog: invalid option -- 'h'

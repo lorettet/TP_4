@@ -9,6 +9,8 @@ EXE=analog
 EXEPATH=./bin/
 SRC=$(wildcard *.cpp)
 OBJ=$(SRC:.cpp=.o)
+TESTPATH=./Tests/
+TEST=mktest.sh
 
 ifeq ($(DEBUG),yes)
 	DEFINE=-D MAP	
@@ -28,4 +30,8 @@ $(EXE): $(OBJ)
 
 clean:
 	$(RM) $(RMFLAGS) *.o $(EXEPATH)$(EXE)
+
+test:
+	$(TESTPATH)$(TEST)
+	
 	
