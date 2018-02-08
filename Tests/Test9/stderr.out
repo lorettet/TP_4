@@ -1,0 +1,2 @@
+Le fichier de sortie n'est pas un .dot
+Usage : analog [-e [-g outputFile.dot [-t heure]]] file

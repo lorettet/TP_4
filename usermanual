@@ -7,7 +7,7 @@ SYNOPSIS
 	analog [-g filename.dot] [-e] [-t hour] filename.log
 
 DESCRIPTION
-	The analog command reads the Apache log file filename.log. Without options, it displays the 10 most requested documents in the log and their hit count in descending order. The log file name must be specified.
+	The analog command reads the Apache log file filename.log. Without options, it displays the 10 most requested documents in the log and their hit count in descending order. The log file name must be specified. The program doesn’t take into account server requests with a return code ‘404’.
 
 	The options are as follows:
 

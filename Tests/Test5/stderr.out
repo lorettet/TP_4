@@ -1,0 +1,2 @@
+Le fichier n'est pas un fichier de log
+Usage : analog [-e [-g outputFile.dot [-t heure]]] file
